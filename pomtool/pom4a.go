@@ -3,6 +3,7 @@ package pomtool
 import "fmt"
 
 type pom4a struct {
+	context *Context
 }
 
 func (inst *pom4a) install() error {
@@ -21,7 +22,9 @@ func (inst *pom4a) help() error {
 }
 
 func (inst *pom4a) version() error {
-	i := &pom4aVersion{}
+	i := &pom4aVersion{
+		context: inst.context,
+	}
 	return i.run()
 }
 
@@ -54,7 +57,9 @@ func (inst *pom4a) run(args []string) error {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-func Run(args []string) error {
-	tool := &pom4a{}
+func Run(ctx *Context, args []string) error {
+	tool := &pom4a{
+		context: ctx,
+	}
 	return tool.run(args)
 }

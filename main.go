@@ -8,7 +8,13 @@ import (
 
 func main() {
 	args := os.Args
-	err := pomtool.Run(args)
+	ctx := &pomtool.Context{
+		AppName:     theModuleName,
+		AppTitle:    theModuleTitle,
+		AppVersion:  theModuleVersion,
+		AppRevision: theModuleRevision,
+	}
+	err := pomtool.Run(ctx, args)
 	if err != nil {
 		panic(err)
 	}
